@@ -14,6 +14,14 @@ $arrSKU = array();
 $arrExistencia = array();
 $arrPrecio = array();
 $arrImagen = array();
+$Nombre1 = $objPHPExcel->getActiveSheet()->getCell('B2')->getCalculatedValue();
+$Status1 = 1;
+$Talla1 = $objPHPExcel->getActiveSheet()->getCell('I2')->getCalculatedValue();
+$Color1 = $objPHPExcel->getActiveSheet()->getCell('K2')->getCalculatedValue();
+$SKU1 = $objPHPExcel->getActiveSheet()->getCell('N2')->getCalculatedValue();
+$Existencia1 = $objPHPExcel->getActiveSheet()->getCell('Q2')->getCalculatedValue();
+$Precio1 = $objPHPExcel->getActiveSheet()->getCell('T2')->getCalculatedValue();
+$Imagen1 = $objPHPExcel->getActiveSheet()->getCell('Y2')->getCalculatedValue();
 echo '<table border=1>
 		<tr>
 			<td>Nombre</td>
@@ -25,7 +33,10 @@ echo '<table border=1>
 			<td>Precio</td>
 			<td>Imagen</td>
 		</tr>';
+		$sql = "INSERT INTO `shopify`(`Nombre`, `Talla`, `Color`, `SKU`, `Existencia`, `Precio`, `imagen`, `Status`) VALUES ('$Nombre1','$Talla1','$Color1','$SKU1','$Existencia1','$Precio1','$Imagen1','$Status1')";
+		$result = mysqli_query($conn, $sql);
 for ($i=2; $i <= $numRows ; $i++) { 
+	$NombreTodos = $objPHPExcel->getActiveSheet()->getCell('A'.$i)->getCalculatedValue();
 	$Nombre = $objPHPExcel->getActiveSheet()->getCell('B'.$i)->getCalculatedValue();
 	$Status = $objPHPExcel->getActiveSheet()->getCell('G'.$i)->getCalculatedValue();
 	$Talla = $objPHPExcel->getActiveSheet()->getCell('I'.$i)->getCalculatedValue();
@@ -34,7 +45,7 @@ for ($i=2; $i <= $numRows ; $i++) {
 	$Existencia = $objPHPExcel->getActiveSheet()->getCell('Q'.$i)->getCalculatedValue();
 	$Precio = $objPHPExcel->getActiveSheet()->getCell('T'.$i)->getCalculatedValue();
 	$Imagen = $objPHPExcel->getActiveSheet()->getCell('Y'.$i)->getCalculatedValue();
-
+	
 	array_push($arrNombre,$Nombre);
 	array_push($arrStatus,$Status);
 	array_push($arrTalla,$Talla);
@@ -73,14 +84,4 @@ echo "</table>";
 	$arrStatusFinal = array_diff($arrStatusFinal, array(''));
 	$arrImagenFinal = array_diff($arrImagenFinal, array(''));
 	$arrExistenciaFinal = array_diff($arrExistenciaFinal, array('0'));
-	var_dump($arrNombreFinal);
-	var_dump($arrStatusFinal);
-	var_dump($arrTallaFinal);
-	var_dump($arrColorFinal);
-	var_dump($arrSKUFinal);
-	var_dump($arrExistenciaFinal);
-	var_dump($arrPrecioFinal);
-	var_dump($arrImagenFinal);
-	$sql = "INSERT INTO `shopify`(`Nombre`, `Talla`, `Color`, `SKU`, `Existencia`, `Precio`, `imagen`, `Status`) VALUES ('$Nombre','$statusDB','$Talla','$Color','$SKU','$Existencia','$Precio','$Imagen')";
-	$result = mysqli_query($conn, $sql);
  ?>
