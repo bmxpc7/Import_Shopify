@@ -88,7 +88,7 @@ echo "</table>";
 	$iter = $k;
 		if ((sizeof($arrExistenciaFinal) < 2) || (sizeof($arrExistenciaFinal) < 2)) {
 			if ((sizeof($arrPrecioFinal)<2) && (sizeof($arrExistenciaFinal)<2)) {
-				$sql = "INSERT INTO `shopify`(`Nombre`, `Existencia`, `Precio`, `imagen`) VALUES ('$arrNombreFinal[$iter]', '$arrExistenciaFinal[0]', '$arrPrecioFinal[0]', '$arrImagenFinal[$iter]')";
+				$sql = "INSERT INTO `shopify`(`Nombre`, `Existencia`, `Precio`, `imagen`) VALUES (".$arrNombreFinal[$iter].", ".$arrExistenciaFinal[0].", ".$arrPrecioFinal[0].", ".$arrImagenFinal[$iter].")";
 		$result = mysqli_query($conn, $sql);
 			}else if(sizeof($arrExistenciaFinal) < 2){
 				$sql = "INSERT INTO `shopify`(`Nombre`, `Existencia`, `Precio`, `imagen`) VALUES ('$arrNombreFinal[$k]', '$arrExistenciaFinal[0]', '$arrPrecioFinal[$k]', '$arrImagenFinal[$k]')";
