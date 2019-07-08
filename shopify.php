@@ -88,33 +88,37 @@ $iter = 0;
 for ($k=0; $k < sizeof($arrNombreFinal) ; $k++) {
 	if ((sizeof($arrExistenciaFinal) < 2) || (sizeof($arrExistenciaFinal) < 2)) {
 		if ((sizeof($arrPrecioFinal)<2) && (sizeof($arrExistenciaFinal)<2)) {
-			$sql = "INSERT INTO `shopify`(`Nombre`, `Existencia`, `Precio`, `imagen`) VALUES ('$arrNombreFinal[$iter]', '$arrExistenciaFinal[0]', '$arrPrecioFinal[0]', '$arrImagenFinal[$iter]')";
-			$result = mysqli_query($conn, $sql);
+			for ($l=0; $l < sizeof($arrColorFinal); $l++) {
+				for ($m=0; $m < sizeof($arrTallaFinal); $m++) {
+					$mul = $m*2;
+					$sql ="INSERT INTO `shopify`(`Nombre`, `Talla`, `Color`, `Existencia`, `Precio`, `imagen`, SKU) VALUES ('$arrNombreFinal[$iter]','$arrTallaFinal[$mul]','$arrColorFinal[$l]','$arrExistenciaFinal[0]','$arrPrecioFinal[0]','$arrImagenFinal[$iter]', '$arrSKUFinal[$m]')";
+					$result = mysqli_query($conn, $sql);
+				}
+			}
 		}else if(sizeof($arrExistenciaFinal) < 2){
-			$sql = "INSERT INTO `shopify`(`Nombre`, `Existencia`, `Precio`, `imagen`) VALUES ('$arrNombreFinal[$k]', '$arrExistenciaFinal[0]', '$arrPrecioFinal[$k]', '$arrImagenFinal[$k]')";
-			$result = mysqli_query($conn, $sql);
+			for ($l=0; $l < sizeof($arrColorFinal); $l++) {
+				for ($m=0; $m < sizeof($arrTallaFinal); $m++) {
+					$mul = $m*2;
+					$sql ="INSERT INTO `shopify`(`Nombre`, `Talla`, `Color`, `Existencia`, `Precio`, `imagen`, SKU) VALUES ('$arrNombreFinal[$iter]','$arrTallaFinal[$mul]','$arrColorFinal[$l]','$arrExistenciaFinal[0]', '$arrPrecioFinal[$k]','$arrImagenFinal[$iter]', '$arrSKUFinal[$m]')";
+					$result = mysqli_query($conn, $sql);
+				}
+			}
 		}else if(sizeof($arrPrecioFinal) < 2){
-			$sql = "INSERT INTO `shopify`(`Nombre`, `Existencia`, `Precio`, `imagen`) VALUES ('$arrNombreFinal[$k]', '$arrExistenciaFinal[$k]', '$arrPrecioFinal[0]', '$arrImagenFinal[$k]')";
-			$result = mysqli_query($conn, $sql);
+			for ($l=0; $l < sizeof($arrColorFinal); $l++) {
+				for ($m=0; $m < sizeof($arrTallaFinal); $m++) {
+					$mul = $m*2;
+					$sql ="INSERT INTO `shopify`(`Nombre`, `Talla`, `Color`, `Existencia`, `Precio`, `imagen`, SKU) VALUES ('$arrNombreFinal[$iter]','$arrTallaFinal[$mul]','$arrColorFinal[$l]','$arrExistenciaFinal[$k]', '$arrPrecioFinal[0]','$arrImagenFinal[$iter]', '$arrSKUFinal[$m]')";
+					$result = mysqli_query($conn, $sql);
+				}
+			}
 		}
 	}else{
-		$sql = "INSERT INTO `shopify`(`Nombre`, `Existencia`, `Precio`, `imagen`) VALUES ('$arrNombreFinal[$k]', '$arrExistenciaFinal[$k]', '$arrPrecioFinal[$k]', '$arrImagenFinal[$k]')";
-		$result = mysqli_query($conn, $sql);
-	}
-	
-	$query= "SELECT id FROM `shopify` WHERE Nombre = '$arrNombreFinal[$iter]'";
-	$numid = mysqli_query($conn, $query);
-
-	while($row = mysqli_fetch_row($numid)) {
-		for ($l=0; $l < sizeof($arrColorFinal); $l++) { 
-			$sql2 = "UPDATE `shopify` SET `Color`= '$arrColorFinal[$l]' WHERE id = $row[0]";
-					$result = mysqli_query($conn, $sql2);
-		}
-		for ($m=0; $m < sizeof($arrTallaFinal); $m++) {
-			$mul = $m*2;
-					$sql3 = "UPDATE `shopify` SET `Talla`= '$arrTallaFinal[$mul]' WHERE id = $row[0]";
-					$result = mysqli_query($conn, $sql3);
-					var_dump($result);
+		for ($l=0; $l < sizeof($arrColorFinal); $l++) {
+				for ($m=0; $m < sizeof($arrTallaFinal); $m++) {
+					$mul = $m*2;
+					$sql ="INSERT INTO `shopify`(`Nombre`, `Talla`, `Color`, `Existencia`, `Precio`, `imagen`, SKU) VALUES ('$arrNombreFinal[$iter]','$arrTallaFinal[$mul]','$arrColorFinal[$l]','$arrExistenciaFinal[$k]', '$arrPrecioFinal[$k]','$arrImagenFinal[$iter]', '$arrSKUFinal[$m]')";
+					$result = mysqli_query($conn, $sql);
+				}
 			}
 	}
 	$iter += $iteNombre;
