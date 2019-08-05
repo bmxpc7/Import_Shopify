@@ -7,7 +7,7 @@ $objPHPExcel->setActiveSheetIndex(0);
 $numRows = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
 //var_dump($numRows);
 $arrStatus = array();
-$arrTalla = array(2,4,6,8,10,12);
+$arrTalla = array();
 $arrColor = array();
 $arrSKU = array();
 $arrExistencia = array();
@@ -50,6 +50,7 @@ for ($i=2; $i <= $numRows ; $i++) {
 	array_push($arrExistencia,$Existencia);
 	array_push($arrPrecio,$Precio);
 	array_push($arrImagen,$Imagen);
+	array_push($arrTalla,$Talla);
 
 	echo "<tr>";
 	echo "<td>".$Nombre."</td>";
@@ -91,20 +92,37 @@ var_dump($arrSKU);
 var_dump($arrExistencia);
 var_dump($arrPrecio);
 var_dump($arrImagen);*/
-foreach ($arrSKUFinal as $sku) {
+/*foreach ($arrSKUFinal as $sku) {
 	print($sku."**");
-}
+}*/
+
+
+
+for ($j=0; $j < sizeof($arrColor); $j++) {
+		print($arrColor[$j]."**");
+		$j+=5;
+
 for ($i=0; $i < sizeof($arrNombre); $i++) {
 	if ($arrNombre[$i] !== null) {
-		#print($arrSKU[$i]."**");
 		if ($arrStatus[$i]==="true") {
 			$stus = 1;
 		}
-		/*$sql ="INSERT INTO `shopify`(`Nombre`, `SKU`, `Precio`, `imagen`, `Tipo`) VALUES ('$arrNombre[$i]','$arrSKU[$i]','$arrPrecio[$i]','$arrImagen[$i]','$arrTipo[$i]')";
+ 		$sql ="INSERT INTO `shopify`(`Nombre`,`Color`, `SKU`, `Precio`, `imagen`, `Tipo`) VALUES ('$arrNombre[$i]','$arrColor[$j]','$arrSKU[$i]','$arrPrecio[$i]','$arrImagen[$i]','$arrTipo[$i]')";
  		$result = mysqli_query($conn, $sql);
- 		var_dump($sql);*/
+ 		var_dump($sql);
 	}
 }
+	}
+
+ 		for ($k=0; $k < sizeof($arrTalla); $k++) {
+ 			#print($arrTalla[$k]."**");
+ 		}
+ 		for ($l=0; $l < sizeof($arrColor); $l++) {
+ 				for ($m=0; $m < sizeof($arrTalla); $m++) {
+ 					#print($arrTalla[$m]."**");
+ 				}
+ 				#print($arrColor[$l*6]."**");
+ 			}
 
 /*var_dump($arrStatusFinal);
 var_dump($arrNombreFinal);*/
